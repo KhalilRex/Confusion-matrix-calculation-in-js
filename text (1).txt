@@ -1,0 +1,32 @@
+// Function to calculate the confusion matrix
+function calculateConfusionMatrix(actualLabels, predictedLabels, classes) {
+  const confusionMatrix = {};
+
+  // Initialize matrix with zeros
+  for (const trueClass of classes) {
+    confusionMatrix[trueClass] = {};
+    for (const predictedClass of classes) {
+      confusionMatrix[trueClass][predictedClass] = 0;
+    }
+  }
+
+  // Populate matrix with actual vs predicted counts
+  for (let i = 0; i < actualLabels.length; i++) {
+    const trueClass = actualLabels[i];
+    const predictedClass = predictedLabels[i];
+    confusionMatrix[trueClass][predictedClass]++;
+  }
+
+  return confusionMatrix;
+}
+
+// Example usage
+const actualLabels = ['cat', 'dog', 'cat', 'dog', 'bird'];
+const predictedLabels = ['dog', 'dog', 'cat', 'dog', 'bird'];
+const classes = ['cat', 'dog', 'bird'];
+
+const confusionMatrix = calculateConfusionMatrix(actualLabels, predictedLabels, classes);
+
+// Display the confusion matrix
+console.log('Confusion Matrix:');
+console.table(confusionMatrix);
